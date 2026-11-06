@@ -17,5 +17,8 @@ test('Login to realworld app', async ({ page }, testInfo) => {
 	await page.getByPlaceholder('password').fill('Panecillo123');
 	await page.getByRole('button', { name: 'Sign in' }).click();
 	await expect(page.locator("//li//a[contains(text(),'Your Feed')]")).toBeVisible();
-	await page.pause();
+	
+	const username = await page.locator("//a[contains(@href,'/profile/')]").textContent();
+	
+	await expect(username).toContain('alejomon');
 });
